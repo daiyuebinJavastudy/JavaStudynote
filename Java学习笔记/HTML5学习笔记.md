@@ -82,3 +82,207 @@ HTML它不是编程语言而是一种超文本标记语言，作用是描述网�
 </html>
 ```
 
+### 3.1图片标签
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片标签学习</title>
+</head>
+<body>
+<!--绝对路径-->
+<!--就是写死了的路径，例如：D:\idea\HTML\resource\img\1.jpg-->
+<!--相对路径-->  
+<!--相对于当前文件的路径，例如../resource/img/1.jpg-->   
+<!--../指上级目录-->
+<img src="../resource/img/1.jpg" alt="这是一张照片" title="这是一张动漫" width="400" height="400">
+</body>
+</html>
+```
+
+### 3.2链接标签
+
+![image-20191117161629733](img/image-20191117161629733.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>超链接标签</title>
+</head>
+<body>
+<!--超链接
+1.target="_blank" 在新标签中打开
+2.target="_self" 在原标签中打开
+3.还有其他空格可选择
+-->
+
+
+<a name="top">顶部</a>
+<a href="#bottom">回到底部</a>
+<a href="https://github.com/daiyuebinJavastudy/JavaStudynote/blob/master/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank">
+    点击查看我的笔记</a>
+
+<a href="我的第？个网页.html" target="_blank"></a>
+<a href="https://baidu.com" target="_self">点击跳转百度</a>
+<br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<!--锚链接
+<a  name="top"></a>
+1.需要一个锚标记
+2.跳转到该标记
+-->
+<a href="#top">回到顶部</a>
+<a name="bottom">底部</a>
+
+<!--功能型链接
+1.邮件链接mailto
+2.qq推广链接
+-->
+<a href="mailto:1006285232@qq.com">点击发送qq邮箱</a>
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1006285232&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:1006285232:53" alt="联系我" title="联系我"/></a>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>超链接标签</title>
+</head>
+<body>
+<!--a标签
+    target="_blank" 在新标签中打开
+    target="_self" 在原标签中打开
+-->
+
+
+<a name="top">顶部</a>
+<a href="#bottom">回到底部</a>
+<a href="https://github.com/daiyuebinJavastudy/JavaStudynote/blob/master/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md" target="_blank">
+    点击查看我的笔记</a>
+
+<a href="我的第？个网页.html" target="_blank"></a>
+<a href="https://baidu.com" target="_self">点击跳转百度</a>
+<br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<!--锚标签
+    <a  name="top"></a>
+    需要一个锚标记
+    跳转到该标记
+-->
+<a href="#top">回到顶部</a>
+<a name="bottom">底部</a>
+</body>
+</html>
+```
+
+### 3.3行业元素 块元素
+
+块元素：无论内容多少，都独占一行，开辟一块新的空间 (p,h1-h6)
+
+行内元素：能够单独摆放在一行内的标签（strong, em, a）
+
+### 3.4列表
+
+列表就是信息资源的一种展示形式，它能把信息更加结构化，条理化的展现在我们面前，便于我们更加清楚的浏览信息
+
+列表分为：
+
+有序列表ol
+
+无序列表ul
+
+自定义列表dl
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表学习</title>
+</head>
+<body>
+<!--有序列表
+ol（order list）
+-->
+<ol>
+    <li>java基础</li>
+    <li>html+css+vue</li>
+    <li>javaweb</li>
+    <li>ssm</li>
+</ol>
+<hr/>
+<!--无需列表
+ul（unordered list）
+-->
+<ul>
+    <li>java基础</li>
+    <li>html+css+vue</li>
+    <li>javaweb</li>
+    <li>ssm</li>
+</ul>
+<!--自定义列表
+dl：标签
+dt：列表名称
+dd：列表内容
+-->
+<hr/>
+<dl>
+    <dt>学习步骤</dt>
+    <dd>java基础</dd>
+    <dd>html+css+vue</dd>
+    <dd>javaweb</dd>
+    <dd>ssm</dd>
+</dl>
+</body>
+</html>
+```
+
+### 3.5表格
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格标签学习</title>
+</head>
+<body>
+<!--表格标签
+    table
+    tr：行
+    td：列
+-->
+<table border="1px">
+    <tr>
+    <!--colspan:跨列-->
+        <td colspan="3" align="center">成绩</td>
+    </tr>
+    <tr>
+        <!-- rowspan ：跨行      -->
+        <td rowspan="2" align="center">daiyuebin</td>
+        <td>英语</td>
+        <td>120</td>
+    </tr>
+    <tr>
+        <td>java</td>
+        <td>130</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center">戴粤斌</td>
+        <td>英语</td>
+        <td>130</td>
+    </tr>
+    <tr>
+        <td>java</td>
+        <td>140</td>
+    </tr>
+
+</table>
+</body>
+</html>
+```
+
