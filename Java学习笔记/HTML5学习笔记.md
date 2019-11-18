@@ -286,3 +286,175 @@ dd：列表内容
 </html>
 ```
 
+### 3.6媒体标签
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>媒体标签</title>
+</head>
+<body>
+<!--视频标签
+    音频标签
+    -->
+<video src="../resource/Vedio/练习.MP4" controls height="400" width="400"></video>
+<img src="../resource/img/love.JPG" alt="i'm in love with you" height="400" width="500">
+<audio src="../resource/Audio/Kina - i'm in love with you.mp3" controls></audio>
+</body>
+
+```
+
+### 3.7页面结构
+
+![image-20191118194323207](img/image-20191118194323207.png)
+
+一个页面的主要分为头部header，中间部分section，article，aside，nav，脚部footer
+
+常用的三个header，nav，footer
+
+### 3.8表单
+
+表单的两种提交方式
+
+get：可以在地址栏看到用户输入的信息，不安全
+
+post：不能在地址栏看到输入信息
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<h1>注册</h1>
+<form action="媒体元素.html" method="get">
+<!--  value="默认值"：文本框默认值
+      maxlength="8" ：输入的最大字符数
+      size="30"：文本框长度  -->
+    <p>用户<input type="text" name="username" ></p>
+    <p>密码<input type="password" name="pwd"></p>
+    <p>
+        <!-- 单选框
+        type="radio"
+        vaule:值
+        name：组，name的值必须一样，否则和多选框没区别
+        -->
+        <input type="radio" value="boy" name="sex">男
+        <input type="radio" value="gril" name="sex">女
+    </p>
+
+    <p>
+    <!--   多选框
+           type="checkbox"
+         -->
+        兴趣
+        <input type="checkbox" value="code" name="hobby">敲代码
+        <input type="checkbox" value="sport" name="hobby">运动
+        <input type="checkbox" value="read" name="hobby">看书
+        <input type="checkbox" value="music" name="hobby">听歌
+    </p>
+
+    <p>
+    <!-- 按钮
+        type="button": 普通按钮
+        type="submit": 提交按钮
+        type="reset" : 重置按钮
+        -->
+        <input type="button" value="点我">
+        <input type="image" src="../resource/img/love.JPG" height="100" width="100">
+
+    </p>
+    <p>
+        <!--下拉框,列表框-->
+        想去国家列表
+        <select name="想去国家选择" >
+            <option value="china">中国</option>
+            <option value="usa" selected>美国</option>
+            <option value="EHC">瑞士</option>
+            <option value="india">印度</option>
+        </select>
+    </p>
+
+    <p>
+        <!--文本域 -->
+        <textarea name="textarea" cols="30" rows="10"></textarea>
+    </p>
+
+    <p>
+    <!--文本域-->
+        <input type="file" name="files">
+    </p>
+    <p>
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+    </p>
+
+</form>
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<h1>注册</h1>
+<form action="媒体元素.html" method="post">
+<!--  value="默认值"：文本框默认值
+      maxlength="8" ：输入的最大字符数
+      size="30"：文本框长度  -->
+    <p>用户<input type="text" name="username" ></p>
+    <p>密码<input type="password" name="pwd"></p>
+    <p>
+        <!-- 单选框
+        type="radio"
+        vaule:值
+        name：组，name的值必须一样，否则和多选框没区别
+        -->
+        <input type="radio" value="boy" name="sex">男
+        <input type="radio" value="gril" name="sex">女
+    </p>
+
+    <p>
+    <!--   多选框
+           type="checkbox"
+         -->
+        兴趣
+        <input type="checkbox" value="code" name="hobby">敲代码
+        <input type="checkbox" value="sport" name="hobby">运动
+        <input type="checkbox" value="read" name="hobby">看书
+        <input type="checkbox" value="music" name="hobby">听歌
+    </p>
+
+    <p>
+    <!-- 按钮
+        type="button": 普通按钮
+        type="submit": 提交按钮
+        type="reset" : 重置按钮
+        -->
+        <input type="button" value="点我">
+
+    </p>
+    <p>
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+    </p>
+</form>
+</body>
+</html>
+```
+
+进入用户登录网页，点击右键检查元素，Network，然后输入用户名密码提交，在检查栏点第一个网页然后点击header查看状态
+
+![image-20191118200612422](img/image-20191118200612422.png)
+
+表单元素格式
+
+![image-20191118200742391](img/image-20191118200742391.png)
+
+input标签里都必须要有name属性，他和你提交的东西是键值的形式存在，
+
