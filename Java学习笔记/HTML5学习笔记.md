@@ -335,6 +335,214 @@ post：不能在地址栏看到输入信息
 <!--  value="默认值"：文本框默认值
       maxlength="8" ：输入的最大字符数
       size="30"：文本框长度  -->
+    <p>用户<input type="text" name="username" value="admin" placeholder="请输入账号"></p>
+    <p>密码<input type="password" name="pwd" value="1234" ></p>
+    <p>
+        <!-- 单选框
+        type="radio"
+        vaule:值
+        name：组，name的值必须一样，否则和多选框没区别
+        -->
+        <input type="radio" value="boy" name="sex" disabled>男
+        <input type="radio" value="gril" name="sex">女
+    </p>
+
+    <p>
+    <!--   多选框
+           type="checkbox"
+         -->
+        兴趣
+        <input type="checkbox" value="code" name="hobby">敲代码
+        <input type="checkbox" value="sport" name="hobby">运动
+        <input type="checkbox" value="read" name="hobby">看书
+        <input type="checkbox" value="music" name="hobby">听歌
+    </p>
+
+    <p>
+    <!-- 按钮
+        type="button": 普通按钮
+        type="submit": 提交按钮
+        type="reset" : 重置按钮
+        -->
+        <input type="button" value="点我">
+        <input type="image" src="../resource/img/love.JPG" height="100" width="100">
+
+    </p>
+    <p>
+        <!--下拉框,列表框-->
+        想去国家列表
+        <select name="想去国家选择" >
+            <option value="china">中国</option>
+            <option value="usa" selected>美国</option>
+            <option value="EHC">瑞士</option>
+            <option value="india">印度</option>
+        </select>
+    </p>
+
+    <p>
+        <!--文本域 -->
+        <textarea name="textarea" cols="30" rows="10" required></textarea>
+    </p>
+
+    <p>
+    <!--文本域-->
+        <input type="file" name="files" >
+    </p>
+
+    <!--邮箱验证-->
+    <p>
+       邮箱验证 <input type="email" name="email" >
+    </p>
+    <!--url验证-->
+        <p>
+            url <input type="url" name="url">
+        </p>
+    <!-- 数字  -->
+    <p>
+        <input type="number" name="数字" max="10" min="0" step="1">
+    </p>
+     <!--滑块
+     type="range"
+     -->
+    <p>
+       音量<input type="range" name="number" max="100" min="0" step="1">
+    </p>
+    <!-- 搜索-->
+       <p>
+           搜索 <input type="search" name="search" id="mark">
+       </p>
+    <!--增强鼠标可用性
+   -->
+    <p>
+        <label for="mark"> 点我试试</label>
+        <input type="text" name="text">
+    </p>
+
+    <!--使用正则表达式的邮箱
+        pattern=""-->
+    <p>
+        <input type="text" name="diy" pattern="/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/">
+    </p>
+    <p>
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+    </p>
+
+</form>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<h1>注册</h1>
+<form action="媒体元素.html" method="get">
+<!--  value="默认值"：文本框默认值
+      maxlength="8" ：输入的最大字符数
+      size="30"：文本框长度  -->
+    <p>用户<input type="text" name="username" value="admin" readonly></p>
+    <p>密码<input type="password" name="pwd" value="1234" hidden></p>
+    <p>
+        <!-- 单选框
+        type="radio"
+        vaule:值
+        name：组，name的值必须一样，否则和多选框没区别
+        -->
+        <input type="radio" value="boy" name="sex" disabled>男
+        <input type="radio" value="gril" name="sex">女
+    </p>
+
+    <p>
+    <!--   多选框
+           type="checkbox"
+         -->
+        兴趣
+        <input type="checkbox" value="code" name="hobby">敲代码
+        <input type="checkbox" value="sport" name="hobby">运动
+        <input type="checkbox" value="read" name="hobby">看书
+        <input type="checkbox" value="music" name="hobby">听歌
+    </p>
+
+    <p>
+    <!-- 按钮
+        type="button": 普通按钮
+        type="submit": 提交按钮
+        type="reset" : 重置按钮
+        -->
+        <input type="button" value="点我">
+        <input type="image" src="../resource/img/love.JPG" height="100" width="100">
+
+    </p>
+    <p>
+        <!--下拉框,列表框-->
+        想去国家列表
+        <select name="想去国家选择" >
+            <option value="china">中国</option>
+            <option value="usa" selected>美国</option>
+            <option value="EHC">瑞士</option>
+            <option value="india">印度</option>
+        </select>
+    </p>
+
+    <p>
+        <!--文本域 -->
+        <textarea name="textarea" cols="30" rows="10"></textarea>
+    </p>
+
+    <p>
+    <!--文本域-->
+        <input type="file" name="files">
+    </p>
+
+    <!--邮箱验证-->
+    <p>
+       邮箱验证 <input type="email" name="email">
+    </p>
+    <!--url验证-->
+        <p>
+            url <input type="url" name="url">
+        </p>
+    <!-- 数字  -->
+    <p>
+        <input type="number" name="数字" max="10" min="0" step="1">
+    </p>
+     <!--滑块
+     type="range"
+     -->
+    <p>
+       音量<input type="range" name="number" max="100" min="0" step="1">
+    </p>
+    <!-- 搜索-->
+       <p>
+           搜索 <input type="search" name="search" id="mark">
+       </p>
+    <!--增强鼠标可用性
+   -->
+    <p>
+        <label for="mark"> 点我试试</label>
+        <input type="text" name="text">
+    </p>
+    <p>
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+    </p>
+
+</form>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<h1>注册</h1>
+<form action="媒体元素.html" method="get">
+<!--  value="默认值"：文本框默认值
+      maxlength="8" ：输入的最大字符数
+      size="30"：文本框长度  -->
     <p>用户<input type="text" name="username" ></p>
     <p>密码<input type="password" name="pwd"></p>
     <p>
@@ -458,3 +666,12 @@ post：不能在地址栏看到输入信息
 
 input标签里都必须要有name属性，他和你提交的东西是键值的形式存在，
 
+![image-20191119200811025](img/image-20191119200811025.png)
+
+![image-20191119202356736](img/image-20191119202356736.png)
+
+### 3.9HTML总结
+
+![image-20191119204241419](img/image-20191119204241419.png)
+
+![image-20191119204249560](img/image-20191119204249560.png)
