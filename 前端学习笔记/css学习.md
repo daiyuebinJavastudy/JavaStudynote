@@ -111,3 +111,168 @@ body p{background：pink；}选择body里的所有p标签
 ![image-20191121201815082](img/image-20191121201815082.png)
 
 ![image-20191121201849691](img/image-20191121201849691.png)
+
+##### 5.span标签
+
+![](img/image-20191122184848641.png)
+
+span标签：行内元素，对于有些要凸显的文字，我们用span标签进行渲染
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>span标签</title>
+    <style>
+        #first{
+            font-size: 50px;
+            color: #7e86ff;
+            font-width: bold;
+        }
+        .second{
+            font-size: 50px;
+            color: red;
+            font-weight: bold;
+        }
+        .f span{
+            font-size: 60px;
+            color: #7e86ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<p>溪水急著要<span id="first">流向海洋</span>,浪潮却渴望重回土地  </p>
+<p>在绿树白花的篱前,曾那样轻易地<span class="second">挥手道别</span></p>
+<p class="f">而沧桑了二十年後,我们的魂魄却<span class="s">夜夜归来</span>微风拂过时,便化作满园的郁香</p>
+</body>
+</html>
+```
+
+##### 6.字体样式
+
+![image-20191122190143508](img/image-20191122190143508.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../resource/css/style2.css" type="text/css">
+</head>
+<body>
+<h1 id="title">海上的日出</h1>
+<p id="writer">巴金</p>
+<p class="part1">
+    <span>为了看日出</span>，我常常早起。那时天还没有大亮，周围非常清静，船上只有机器的响声。
+    天空还是一片浅蓝，颜色很浅。转眼间天边出现了一道红霞，慢慢地在扩大它的范围，加强它的亮光。我知道太阳要从天边升起来了，便不转眼地望着那里。
+    果然过了一会儿，在那个地方出现了太阳的小半边脸，红是真红，却没有亮光。这个太阳好像负着重荷似地一步一步、慢慢地努力上升，到了最后，终于冲破了云霞，完全跳出了海面，颜色红得非常可爱。一刹那间，这个深红的圆东西，忽然发出了夺目的亮光，射得人眼睛发痛，它旁边的云片也突然有了光彩。
+    有时太阳走进了云堆中，它的光线却从云里射下来，直射到水面上。这时候要分辨出哪里是水，哪里是天，倒也不容易，因为我就只看见一片灿烂的亮光。
+    有时天边有黑云，而且云片很厚，太阳出来，人眼还看不见。然而太阳在黑云里放射的光芒，透过黑云的重围，替黑云镶了一道发光的金边。后来太阳才慢慢地冲出重围，出现在天空，甚至把黑云也染成了紫色或者红色。这时候发亮的不仅是太阳、云和海水，连我自己也成了明亮的了。
+    这不是很伟大的奇观么？（1927年1月）</p>
+</body>
+
+```
+
+
+
+font开头的样式都是字体样式
+
+```html
+body{
+    /*设置字体样式*/
+    font-family: 华文楷体;
+}
+#title{
+    font-size: 50px;
+    color: aqua;
+    font-weight: bold;
+
+}
+#writer{
+    font-size: 30px;
+    color:gold;
+    font-weight: bold;
+}
+
+.part1{
+    /*font： 字体风格-粗细-大小-字体类型*/
+    font: italic lighter 20px "宋体";
+}
+.part1 span{
+    font-style: italic;
+    color: gold;
+}
+```
+
+
+
+##### 7.文本样式
+
+text开头的为文本样式
+
+![image-20191122194819442](img/image-20191122194819442.png)
+
+
+
+```HTML
+.indent{
+    /*文本缩进*/
+    text-indent: 2em;
+}
+#col{
+    /*rgb:0~255
+    color: rgb(255,0,0);
+    rgba:0~!   a代表透明度
+    color: rgba(255,0,0,0.5);
+    */
+    color: rgba(255,0,0,0.5);
+}
+h1{
+    /*设置文本对齐方式*/
+    /*文本居中*/
+    text-align: center;
+    /*文本背景*/
+    background: brown;
+    /*文本高度*/
+    height: 100px;
+    /*行高*/
+    line-height: 100px;
+
+}
+.p1{
+    text-align: center;
+    /*文本装饰*/
+    text-decoration: underline;
+    color: gold;
+    font-weight: bold;
+}
+```
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../resource/css/style3.css">
+</head>
+<body>
+<h1 >海上的日出</h1>
+<p  class="p1">巴金</p>
+<p class="indent" id="col">
+    为了看日出，我常常早起。那时天还没有大亮，周围非常清静，船上只有机器的响声。
+    天空还是一片浅蓝，颜色很浅。转眼间天边出现了一道红霞，慢慢地在扩大它的范围，加强它的亮光。我知道太阳要从天边升起来了，便不转眼地望着那里。
+    果然过了一会儿，在那个地方出现了太阳的小半边脸，红是真红，却没有亮光。这个太阳好像负着重荷似地一步一步、慢慢地努力上升，到了最后，终于冲破了云霞，完全跳出了海面，颜色红得非常可爱。一刹那间，这个深红的圆东西，忽然发出了夺目的亮光，射得人眼睛发痛，它旁边的云片也突然有了光彩。
+    有时太阳走进了云堆中，它的光线却从云里射下来，直射到水面上。这时候要分辨出哪里是水，哪里是天，倒也不容易，因为我就只看见一片灿烂的亮光。
+    有时天边有黑云，而且云片很厚，太阳出来，人眼还看不见。然而太阳在黑云里放射的光芒，透过黑云的重围，替黑云镶了一道发光的金边。后来太阳才慢慢地冲出重围，出现在天空，甚至把黑云也染成了紫色或者红色。这时候发亮的不仅是太阳、云和海水，连我自己也成了明亮的了。
+    这不是很伟大的奇观么？（1927年1月）</p>
+</body>
+</html>
+```
+
+![image-20191122203216040](img/image-20191122203216040.png)
+
+##### 
