@@ -2,13 +2,13 @@
 
 ### 1.什么是web？
 
-![image-20191123192742228](C:\Users\daiyu\AppData\Roaming\Typora\typora-user-images\image-20191123192742228.png)
+![image-20191123192742228](img/image-20191123192742228-1574644693398.png)
 
-![image-20191123192714164](C:\Users\daiyu\AppData\Roaming\Typora\typora-user-images\image-20191123192714164.png)
+![image-20191123192714164](img/image-20191123192714164-1574644703242.png)
 
 ##### 1.1静态web？
 
-![image-20191123192554660](C:\Users\daiyu\AppData\Roaming\Typora\typora-user-images\image-20191123192554660.png)
+![image-20191123192554660](img/image-20191123192554660.png)
 
 web页面无法更新，用户看到的是同一个界面
 
@@ -28,9 +28,9 @@ web页面随时更新，在不同时间地点，用户看到的界面都不一�
 
 它的内部原理是？
 
-![image-20191123195820197](C:\Users\daiyu\AppData\Roaming\Typora\typora-user-images\image-20191123195820197.png)
+![image-20191123195820197](img/image-20191123195820197.png)
 
-![image-20191123192114635](C:\Users\daiyu\AppData\Roaming\Typora\typora-user-images\image-20191123192114635.png)
+![image-20191123192114635](img/image-20191123192114635.png)
 
 ### 2.web服务器
 
