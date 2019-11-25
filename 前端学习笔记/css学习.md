@@ -112,7 +112,7 @@ body p{background：pink；}选择body里的所有p标签
 
 ![image-20191121201849691](img/image-20191121201849691.png)
 
-##### 5.span标签
+### 5.span标签
 
 ![](img/image-20191122184848641.png)
 
@@ -150,7 +150,7 @@ span标签：行内元素，对于有些要凸显的文字，我们用span标签
 </html>
 ```
 
-##### 6.字体样式
+### 6.字体样式
 
 ![image-20191122190143508](img/image-20191122190143508.png)
 
@@ -209,7 +209,7 @@ body{
 
 
 
-##### 7.文本样式
+### 7.文本样式
 
 text开头的为文本样式
 
@@ -276,3 +276,194 @@ h1{
 ![image-20191122203216040](img/image-20191122203216040.png)
 
 ##### 
+
+### 8.文本阴影
+
+![image-20191123104837461](img/image-20191123104837461.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本阴影</title>
+    <style>
+        h2{
+            /*文本阴影
+            color，x轴偏移：正数向左，负数向右 ，y轴偏移：正数向上，负数向下，阴影扩散半径：*/
+            text-shadow:red 10px 10px 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>学习css文本阴影</h2>
+</body>
+</html>
+```
+
+![image-20191123105618499](img/image-20191123105618499.png)
+
+### 9.超链接伪类
+
+![image-20191123110935146](img/image-20191123110935146.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        a{
+            text-decoration: none;
+            font-size: 30px;
+            color: cornflowerblue;
+        }
+        a:hover{
+            font-size: 50px;
+            color: red;
+        }
+        a:active{
+            font-size: 15px;
+            color: gray;
+        }
+        /*a:visited{*/
+        /*    font-size: 40px;*/
+        /*    color: black;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<a href="">
+    点我变好看，变健康，变阳光，变自信！
+</a>
+</body>
+</html>
+```
+
+![image-20191123111026015](img/image-20191123111026015.png)
+
+### 10.列表样式和背景样式
+
+![image-20191123111907782](img/image-20191123111907782.png)
+
+![image-20191123111926046](img/image-20191123111926046.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul li{
+            list-style: none;
+        }
+        body{
+            background-image: url("../resource/img/love.JPG");
+            background-repeat: no-repeat;
+            /*背景元素填充整个网页*/
+            background-size: cover;
+
+        }
+    </style>
+</head>
+<body>
+<ul >
+    <li>java基础</li>
+    <li>html</li>
+    <li>css</li>
+    <li>vue</li>
+
+</ul>
+</body>
+</html>
+```
+
+![image-20191123112603008](img/image-20191123112603008.png)
+
+### 11.css3渐变
+
+![image-20191123114144326](img/image-20191123114144326.png)
+
+![image-20191123114212098](img/image-20191123114212098.png)
+
+![image-20191123115024159](img/image-20191123115024159.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            /*线向渐变*/
+            /*background: linear-gradient(to right, pink,yellow,green);*/
+            /*径向渐变*/
+            /*background: radial-gradient(circle at 0 0, pink,yellow,gold);*/
+            /*默认在圆心*/
+            background: radial-gradient( pink,yellow,gold);
+        }
+    </style>
+</head>
+<body>
+<div></div>
+</body>
+
+```
+
+![image-20191123115139857](img/image-20191123115139857.png)
+
+### 12.盒子模型
+
+
+
+![image-20191123125421179](img/image-20191123125421179.png)
+
+![image-20191123125449746](img/image-20191123125449746.png)
+
+![image-20191123125534516](img/image-20191123125534516.png)
+
+![image-20191123125550516](img/image-20191123125550516.png)![image-20191123125603556](img/image-20191123125603556.png)
+
+![image-20191123125620254](img/image-20191123125620254.png)![image-20191123125635510](img/image-20191123125635510.png)
+
+![image-20191123125652703](img/image-20191123125652703.png)![image-20191123125714499](img/image-20191123125714499.png)![image-20191123125730170](img/image-20191123125730170.png)![image-20191123125747473](img/image-20191123125747473.png)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .test{
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(rgba(255,0,0,0.3),yellow,gold);
+            padding: 10px;
+            border: red solid 5px;
+            margin: 10px;
+            margin: 0px auto;
+            border-radius: 10px;
+        }
+        body{
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+<div class="test">
+    天空还是一片浅蓝，颜色很浅。转眼间天边出现了一道红霞，慢慢地在扩大它的范围，加强它的亮光。我知道太阳要从天边升起来了，便不转眼地望着那里。
+
+
+</div>
+</body>
+
+```
+
+![image-20191123125831666](img/image-20191123125831666.png)
+
