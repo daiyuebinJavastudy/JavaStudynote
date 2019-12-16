@@ -532,13 +532,13 @@ show engines;
         - ![image-20191213154335850](img/image-20191213154335850.png)![image-20191213155052380](img/image-20191213155052380.png)
 
       - Using  temporary：
-    
+        
         - ![image-20191213155225987](img/image-20191213155225987.png)![image-20191213155617477](img/image-20191213155617477.png)
-    
+        
       - Using index：只出现Using index （以上列子：从索引中检索出来的结果就是符合order by的排序要求，无需再去表中排序；）
-    
+        
         - ![](img/image-20191213155746893.png)![image-20191213161051633](img/image-20191213161051633.png) https://blog.csdn.net/jh993627471/article/details/79421363 
-    
+        
         - 覆盖所有：**查询列要被所建的索引覆盖，**      简单理解：就是select的数据列只需从索引中即可获得，不需要再去读取数据行，MYSQL可以利用索引就能找到select所要查找的数据并返回，而不必再去根据索引，再次读取数据文件
 
 
@@ -770,6 +770,12 @@ CREATE INDEX P ON  phone(card);
 
 ![image-20191214200752230](img/image-20191214200752230.png)
 
+如果like后面跟的是常量如like ‘k%’这里我们知道了是已k开头的常量所以可以使用索引
+
+而以通配符开头如 like ‘%k’，那我们就不知道开头的什么是几个字符；
+
+![image-20191215143753119](img/image-20191215143753119.png)
+
 8。字符串不加单引号索引失效
 
 ![image-20191214202319647](img/image-20191214202319647.png)
@@ -778,13 +784,378 @@ CREATE INDEX P ON  phone(card);
 
 ![image-20191214202713476](img/image-20191214202713476.png)
 
+***索引面试题分析***
+
+![image-20191215101917966](img/image-20191215101917966.png)
+
+情况1
+
+![image-20191215102310785](img/image-20191215102310785.png)
+
+情况2：范围 range
+
+![image-20191215103043887](img/image-20191215103043887.png)
+
+情况3：order by （mysql按照索引的顺序分析优化）
+
+![image-20191215103629019](img/image-20191215103629019.png)
+
+order by （const就一个不需参加排序）
+
+![image-20191215105132218](img/image-20191215105132218.png)
+
+情况4：group by：分组之前必排序（它和order by 的排序法则和索引优化原则几乎一致，除了group by 还有having）
+
+![image-20191215110552613](img/image-20191215110552613.png)
+
+**总结**
+
+​					查询尽量定值然后是根据范围，最后再排序，order by字段范围顺序最好与索引一致
+
+​					group by分组之前基本要排序，索引group by顺序最好与索引一致，不然会系统会自己排序产生临时表
+
+![image-20191215111601895](img/image-20191215111601895.png)![image-20191215111705104](img/image-20191215111705104.png)
+
+
+
+### 七，查询截取分析
+
+相关子查询exists : 是否满足这个条件，是否存在这个条件，为1 则存在，为0则不存在
+
+exists与in的区别 https://blog.csdn.net/jinjiniao1/article/details/92666614 
+
+![image-20191215150833025](img/image-20191215150833025.png)
+
+面试：你对SQL的优化有哪些见解，或者说你觉得SQL的优化步骤是什么
+
+![image-20191215151013239](img/image-20191215151013239.png)
+
+
+
+#### 1.**查询优化**
+
+- ​	永远小表驱动大表
+  - 优化原则：小的数据集驱动大的数据集：如果主查询的数据大于子查询的数据用in性能更好，反之用exists
+  
+- ![image-20191215152848167](img/image-20191215152848167.png)![image-20191215152919720](img/image-20191215152919720.png)
+  
+    **order by 关键字优化** 
+  
+  注意：order by 与索引的排序有关， where与索引的查找有关    （提示：*索引是一种排好序的快速查找的数据结构）*
+  
+  ![image-20191215165421417](img/image-20191215165421417.png)![image-20191215170019765](img/image-20191215170019765.png)
+  
+  首先有三种情况：
+  
+  如果select的列是所有列，且超出建立的索引关联列的范围，where后的条件不满足索引建立的顺序条件则不会用到索引，切会出现Using filesort
+  
+  1，select的列是否只包含所有列；（没有考虑where条件的情况）
+  
+  ![image-20191215161704700](img/image-20191215161704700.png)![image-20191215162249086](img/image-20191215162249086.png)
+  
+  2.select的列是否只包含所有列（考虑where条件 =）
+  
+  ![image-20191215163752517](img/image-20191215163752517.png)
+  
+
+​     3.考虑where条件 范围（这里都是以select选中在索引范围列的为前提）
+
+![image-20191215165107044](img/image-20191215165107044.png)
+
+如何提高order by的速度；
+
+![image-20191215192026701](img/image-20191215192026701.png)
+
+order by排序字段如果不在索引上，就会使用 Using filesort排序，MySQL就会启用两种算法，
+
+双路排序：MySQL4.1之前使用的双路排序，字面意思就是对磁盘进行两次扫描，最终得到数据
+
+​					读取指针和order by列对他们进行排序，然后扫面已经排好序的列表，按照列表中的值重新从列表中					读取对应的数据数据；
+
+​					从磁盘中取排序字段，在buffer中排序，再从磁盘中取需要的字段；
+
+​					缺点：两次扫描磁盘，I/O耗时长，而后对算法改进，出现了单路排序
+
+单路排序：从磁盘读取查询需要的所有列，按照order by列再buffer对他们进行排序，然后扫面排序后的列表对他				    们进行输出，它的效率更快，避免了二次读取数据，并把随机IO变成了顺序IO，但它使用了更多的空					间，因为它把每一行都保存再了内存中；
+
+**双路排序**：是首先根据相应的条件取出相应的排序字段和可以直接定位行数据的行指针信息，然后在sort buffer 中进行排序。
+
+**单路排序**：是一次性取出满足条件行的所有字段，然后在sort buffer中进行排序。
+
+![image-20191215194041754](img/image-20191215194041754.png)
+
+![image-20191215191336707](img/image-20191215191336707.png)
+
+#### **group by关键字优化**
+
+与order by几乎相同，不同的是它是先排序然后分组
+
+然后多了一个Having，能写再where后面的尽量不写在Having后
+
+![image-20191215194628507](img/image-20191215194628507.png)
+
+**慢查询日志**
+
+​	![image-20191216092102563](img/image-20191216092102563.png)![image-20191216092222004](img/image-20191216092222004.png)
+
+查看是否开启慢日志查询：
+
+- SHOW VARIABLES LIKE 'slow_query_log';
+
+  ![image-20191216094041305](img/image-20191216094041305.png)
+
+  
+
+- 开启：SET GLOBAL slow_query_log=1;(但是此命令只对当前数据有效，重启数据库后失效)
+
+- 永久开启
+
+  ![image-20191216102149210](img/image-20191216102149210.png)
+
+- 长久生效（但是此功能不建议长久生效）
+
+  ![image-20191216094658146](img/image-20191216094658146.png)
+
+- SHOW VARIABLES LIKE 'long_query_time';查看为慢查询的标准
+
+  ​	![image-20191216095435980](img/image-20191216095435980.png)
+
+- 设置阈值时间: SET GLOBAL long_query_time=3;  (需退出从登MySQL)
+
+   ![image-20191216095614391](img/image-20191216095614391.png)
+
+- 执行select sleep（4）函数使时间为4秒：
+
+  ![image-20191216101409233](img/image-20191216101409233.png)
+
+  抓取日志：
+
+  ![image-20191216100907684](img/image-20191216100907684.png)
+
+  ![image-20191216101537520](img/image-20191216101537520.png)
+
+-  查询系统中有多少条慢查询记录：    SHOW GLOBAL STATUS LIKE "%slow_queries%";
+
+  ![image-20191216102053967](img/image-20191216102053967.png)
+
+- 日志分析工具：mysqlddumpslow
+
+  ![image-20191216102316297](img/image-20191216102316297.png)
+
+- 查看MySQLdumpslow帮助信息：mysqldumpslow --help;(我这里没有安装这个工具，以后用到再研究)
+
+  ![image-20191216104120331](img/image-20191216104120331.png)![image-20191216104224510](img/image-20191216104224510.png)
+
+  #### **批量查询插入数据脚本**
+
+  
+
+![image-20191216105834398](img/image-20191216105834398.png)![image-20191216105732483](img/image-20191216105732483.png)
+
+建表
+
+```mysql
+CREATE TABLE dept(
+id INT UNSIGNED PRIMARY KEY  AUTO_INCREMENT,
+deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
+dname VARCHAR(20) NOT NULL DEFAULT '',
+loc VARCHAR(13) NOT NULL DEFAULT ''
+)ENGINE INNODB DEFAULT CHARSET=GBK;
+
+
+CREATE TABLE emp(
+id INT UNSIGNED PRIMARY KEY  AUTO_INCREMENT,
+empno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
+ename VARCHAR(20) NOT NULL DEFAULT '',
+job VARCHAR(9) NOT NULL DEFAULT '',
+mgr MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
+hiredate DATE NOT NULL,
+sal DECIMAL(7,2) NOT NULL,
+comm DECIMAL(7,2) NOT NULL,
+deptno MEDIUMINT UNSIGNED NOT NULL DEFAULT 0
+)ENGINE INNODB DEFAULT CHARSET=GBK;
+```
+
+- 设置参数：
+
+先查看是否开启
+
+SHOW VARIABLES like "log_bin_trust_function_creators";
+
+![image-20191216143959991](img/image-20191216143959991.png)
+
+然后开启
+
+![image-20191216144023299](img/image-20191216144023299.png)
+
+
+
+​                 建立数据库函数：
 
 
 
 
 
+```mysql
+#随机生成字符串
+DELIMITER $$
+CREATE FUNCTION rand_string(n INT) RETURNS VARCHAR(255)
+BEGIN
+DECLARE char_str VARCHAR(255) DEFAULT 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+DECLARE return_str VARCHAR(255) DEFAULT '';
+DECLARE i INT DEFAULT 0;
+WHILE i<n do
+SET return_str = CONCAT(return_str,SUBSTRING(char_str,FLOOR(1+RAND()*52),1));
+SET i=i+1;
+END WHILE;
+RETURN return_str;
+END$$
+#随机生成部门编号
+DELIMITER $$
+CREATE FUNCTION rand_num() 
+RETURNS INT(5)
+BEGIN
+DECLARE i INT DEFAULT 0;
+SET i=FLOOR(100+RAND()*10);
+RETURN i;
+END$$
+#建立存储过程插入dept表数据（生成100到110.120都可）
+
+DELIMITER $$
+CREATE PROCEDURE insert_dept(IN START INT(10), IN max_num INT(10))
+BEGIN
+DECLARE i INT DEFAULT 0;
+SET autocommit =0;
+REPEAT
+	SET i=i+1;
+	INSERT INTO dept (deptno,dname,loc) VALUES ((START+i),rand_string(10),rand_string(8));	
+UNTIL i= max_num END REPEAT;
+COMMIT;
+END$$
+#建立存储过程插入emp表数据（生成部门编号起始值，和员工数量值）
+DELIMITER $$
+CREATE PROCEDURE insert_emp(IN START INT(10),IN max_num INT(10))
+BEGIN
+DECLARE i INT DEFAULT 0;
+SET autocommit=0;
+REPEAT
+	SET i=i+1;
+	INSERT INTO emp(empno,ename,job,mgr,hiredate,sal,comm,deptno) VALUES((START+i),rand_string(6),'SALESMAN',001,CURDATE(),2000,400,rand_num());
+UNTIL i = max_num END REPEAT;
+COMMIT;
+END$$
+
+```
+
+点击运行函数，输入开始值，和数量
+
+![image-20191216162944247](img/image-20191216162944247.png)
+
+![image-20191216163036073](img/image-20191216163036073.png)
 
 
+
+​	
+
+#### show profile
+
+![image-20191216164754614](img/image-20191216164754614.png)![image-20191216193830103](img/image-20191216193830103.png)
+
+- 查看是否开启：SHOW VARIABLES LIKE "profiling";			
+
+  ![image-20191216190547406](img/image-20191216190547406.png)									
+
+​     
+
+- 开启show profile：set profiling =on;
+
+
+![image-20191216190704783](img/image-20191216190704783.png)
+
+
+
+- 执行SQL语句：select * from emp group by id%10 limit 150000;
+
+  
+
+  ​							select * from emp group by id%20 order by 5;
+
+  ![image-20191216191323787](img/image-20191216191323787.png)
+
+- 查看：show profiles：
+
+  ![image-20191216191657847](img/image-20191216191657847.png)
+
+- 诊断SQL:常用语句 show profile cpu,block io for query id;
+
+  ![image-20191216192501050](img/image-20191216192501050.png)
+
+  除了cpu，block io意外还可以通过show profile查看的东西
+
+  ![image-20191216192608979](img/image-20191216192608979.png)
+
+  那么我们通过show file诊断了以后怎么知道哪些有问题呢？
+
+  日常开发需要注意的结论：
+
+  1.converting HEAP to MyISAM:查询结果太大，内存不够
+
+  2.Creating tmp table:创建临时表
+
+  3.Copying to tmp table on disk：把内存中临时表复制到磁盘，危险
+
+  4.locked：锁表
+
+  ![image-20191216193511005](img/image-20191216193511005.png)![image-20191216194044506](img/image-20191216194044506.png)
+
+  #### **全日志查询**(永远不要在生产环境下开启该功能)
+
+1.配置启用：
+
+![image-20191216194338165](img/image-20191216194338165.png)
+
+2.编码启用：
+
+开启全局日志 ：set global general_log=1;
+
+将日志输入模式设置为表模式：set global log_output='TABLE';
+
+
+
+![image-20191216194615310](img/image-20191216194615310.png)
+
+查看日志内容（记录查询的时间和查询语句）:select* from mysql.general_log;
+
+![image-20191216195107228](img/image-20191216195107228.png)
+
+
+
+### 八，MySQL锁机制
+
+##### 1.什么是锁：是计算机协调多个进程或线程并发访问某一资源的机制
+
+![image-20191216195738906](img/image-20191216195738906.png)
+
+![image-20191216200415637](img/image-20191216200415637.png)
+
+
+
+##### 2.锁的分类
+
+- 按照对数据的操作类型（读/写）：
+
+  - 读锁与写锁
+  - ![image-20191216200621491](img/image-20191216200621491.png)
+
+- 对数据操作的粒度（表锁与行锁）：
+
+  - 表锁（偏读）
+
+    特点：偏向MyISAM存储引擎，开销小，加锁快，无死锁；锁定粒度大，发生锁冲突的概率最高，并发性最低；
+
+    
+
+  - 案列分析；
 
 
 
